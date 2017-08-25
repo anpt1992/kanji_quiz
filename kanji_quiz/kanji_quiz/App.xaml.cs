@@ -2,33 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using DryIoc;
+using kanji_quiz.Models;
+using kanji_quiz.Services;
+using kanji_quiz.Views;
+using Prism.DryIoc;
 using Xamarin.Forms;
 
 namespace kanji_quiz
 {
-    public partial class App : Application
+    public partial class App
     {
+        public static Configuration Configuration { get; set; }
         public App()
+        {
+           
+        }
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new kanji_quiz.MainPage();
+            //if (Current.Properties.TryGetValue("Token", out object token))
+            //{
+            //    if (!string.IsNullOrEmpty((string)token))
+            //    {
+            //        await NavigationService.NavigateAsync("Navigation/Home");
+            //        return;
+            //    }
+            //}
+            await NavigationService.NavigateAsync("Home");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes()
         {
-            // Handle when your app starts
-        }
+            Container.RegisterTypeForNavigation<HomePage>("Home");
+            /*Container.Register<ApiService>(Reuse.Singleton);
+            Container.Register<TokenService>(Reuse.Singleton);
+            Container.Register<StarBucksService>(Reuse.Singleton);
 
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
+            Container.RegisterTypeForNavigation<NavigationPage>("Navigation");
+            Container.RegisterTypeForNavigation<LoginPage>("Login");
+            
 
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
+            Container.RegisterTypeForNavigation<HomePage>("Home");
+            Container.RegisterTypeForNavigation<SearchPage>("Search");
+            Container.RegisterTypeForNavigation<MoviePage>("Movie");*/
         }
     }
 }
