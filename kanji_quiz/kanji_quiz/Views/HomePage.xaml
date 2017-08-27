@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:kanji_quiz"
              x:Class="kanji_quiz.Views.HomePage">
     <StackLayout VerticalOptions="Center" Margin="40">
-        <Button Text="Start" Clicked="Start_Clicked"></Button>
-        <Button Text="Options" Clicked="Options_Clicked"></Button>
+        <Button Text="Start" Command="{Binding StartCommand}"/>
+        <Button Text="Options" Command="{Binding OptionsCommand}"/>
     </StackLayout>
 </ContentPage>

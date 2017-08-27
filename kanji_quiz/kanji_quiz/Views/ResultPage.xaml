@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="kanji_quiz.Views.ChooseModePage">    
+             x:Class="kanji_quiz.Views.ResultPage">
     <ContentPage.Content>
         <StackLayout Margin="40">
-            <Label Text="Welcome to Choose Mode Page!" />
-            <Button Text="SeiOn" Command="{Binding SeiOnCommand}"/>
-            <Button Text="Back" VerticalOptions="EndAndExpand" Command="{Binding BackCommand}"/>
+            <Label Text="Welcome to Result Page!" />
+            <Button Text="Finish" VerticalOptions="EndAndExpand" Command="{Binding FinishCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

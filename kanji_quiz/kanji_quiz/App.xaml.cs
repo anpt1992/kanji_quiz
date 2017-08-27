@@ -21,30 +21,24 @@ namespace kanji_quiz
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            //if (Current.Properties.TryGetValue("Token", out object token))
-            //{
-            //    if (!string.IsNullOrEmpty((string)token))
-            //    {
-            //        await NavigationService.NavigateAsync("Navigation/Home");
-            //        return;
-            //    }
-            //}
+            
             await NavigationService.NavigateAsync("Home");
         }
 
         protected override void RegisterTypes()
         {
+            Container.RegisterTypeForNavigation<NavigationPage>("Navigation");
             Container.RegisterTypeForNavigation<HomePage>("Home");
+            Container.RegisterTypeForNavigation<ChooseModePage>("ChooseMode");
+            Container.RegisterTypeForNavigation<OptionsPage>("Options");
+            Container.RegisterTypeForNavigation<QuizPage>("Quiz");
+            Container.RegisterTypeForNavigation<ResultPage>("Result");
             /*Container.Register<ApiService>(Reuse.Singleton);
             Container.Register<TokenService>(Reuse.Singleton);
             Container.Register<StarBucksService>(Reuse.Singleton);
 
-            Container.RegisterTypeForNavigation<NavigationPage>("Navigation");
-            Container.RegisterTypeForNavigation<LoginPage>("Login");
             
-
-            Container.RegisterTypeForNavigation<HomePage>("Home");
+            
             Container.RegisterTypeForNavigation<SearchPage>("Search");
             Container.RegisterTypeForNavigation<MoviePage>("Movie");*/
         }
