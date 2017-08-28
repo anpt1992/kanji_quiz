@@ -16,8 +16,8 @@ namespace kanji_quiz.Services
     {
         private readonly HttpClient _httpClient;
 
-        private const string HOST = "https://api.themoviedb.org";
-        internal const string API_KEY = "c64e3049b5c72f028a704da43f151b4c";
+        private const string HOST = "http://shtptraining-career.azurewebsites.net";
+        
 
         public ApiService()
         {
@@ -25,7 +25,11 @@ namespace kanji_quiz.Services
             _httpClient = new HttpClient { BaseAddress = new Uri(HOST) };
         }
 
-       
+        public Task<Quiz> Quiz_Detail(string Id)
+        {
+            var url = $"Quiz/detail/{Id}";
+            return GetAsync<Quiz>(url);
+        }
         internal async Task<T> GetAsync<T>(string url) where T : class
         {
 

@@ -50,5 +50,30 @@ namespace kanji_quiz.ViewModels
         {
             await DialogService.DisplayAlertAsync("Error", e.Message, "OK");
         }
+        public async Task<T> RunActionAsync<T>(Func<Task<T>> func)
+        {
+            try
+            {
+                if (IsBusy == true)
+                    return default(T);
+
+                IsBusy = true;
+
+                return await func.Invoke();
+            }
+            catch (Exception e)
+            {
+                while (e.InnerException != null)
+                {
+                    e = e.InnerException;
+                }
+                OnException(e);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+            return default(T);
+        }
     }
 }
