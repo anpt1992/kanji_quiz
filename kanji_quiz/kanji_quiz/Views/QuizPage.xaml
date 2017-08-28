@@ -4,30 +4,18 @@
              x:Class="kanji_quiz.Views.QuizPage">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <StackLayout x:Name="slQuestion" IsVisible="true">
-                <Label x:Name="lblQuestion"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       HorizontalTextAlignment="Center"
-                       Text="{Binding Question}" />
-                <Image Source="A.jpg" />
-                <Button x:Name="btnAnswerOne" Text="{Binding Answer1}" 
-				    IsEnabled="{Binding Answer1Enabled}" />
-                <Button x:Name="btnAnswerTwo" Text="{Binding Answer2}" 
-				    IsEnabled="{Binding Answer2Enabled}" />
-                <Button x:Name="btnAnswerThree" Text="{Binding Answer3}" 
-				    IsEnabled="{Binding Answer3Enabled}" />
+            <StackLayout x:Name="slQuestion" IsVisible="true">                
+                <Image Source="{Binding Question}" VerticalOptions="Center"/>
+                <Button x:Name="btnAnswerOne" Text="{Binding Answer1}" IsEnabled="{Binding Answer1Enabled}" />
+                <Button x:Name="btnAnswerTwo" Text="{Binding Answer2}" IsEnabled="{Binding Answer2Enabled}" />
+                <Button x:Name="btnAnswerThree" Text="{Binding Answer3}" IsEnabled="{Binding Answer3Enabled}" />
                 <Label x:Name="lblMessage"
                        FontAttributes="Italic"
                        FontSize="Large"
                        HorizontalTextAlignment="Center"
                        Text="{Binding Message}" />
             </StackLayout>
-
-            <ActivityIndicator x:Name="aiLoading"
-                               IsRunning="{Binding IsLoading}"
-                               IsVisible="{Binding IsLoading}"
-                               Color="Blue" />
+            
             <StackLayout Margin="40" VerticalOptions="EndAndExpand">               
                 <Button Text="Result" Command="{Binding ResultCommand}"/>
                 <Button Text="Back" Command="{Binding BackCommand}"/>

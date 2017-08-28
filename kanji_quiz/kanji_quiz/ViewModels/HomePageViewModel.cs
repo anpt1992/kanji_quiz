@@ -11,16 +11,14 @@ using Prism.Navigation;
 namespace kanji_quiz.ViewModels
 {
     public class HomePageViewModel : BaseViewModel
-    {
-        private readonly ApiService _apiService;
-
+    { 
         public DelegateCommand StartCommand { get; }
         public DelegateCommand OptionsCommand { get; }
         public HomePageViewModel(INavigationService navigationService, ApiService apiService) : base(navigationService)
         {
             StartCommand = new DelegateCommand(Login);
             OptionsCommand = new DelegateCommand(Options);
-            _apiService = apiService;
+           
         }
 
         private async void Login()
@@ -35,10 +33,6 @@ namespace kanji_quiz.ViewModels
 
         public override async void OnNavigatedTo(NavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-
-          
-            var result = await RunActionAsync(() => _apiService.Quiz_Detail("1"));
         }
 
         protected override void OnException(Exception e)
