@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Realms;
 
 namespace kanji_quiz.Models
 {
-    class Quiz
+    class Quiz:RealmObject
     {
         public string Id { get; set; }
         public string Question { get; set; }

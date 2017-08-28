@@ -10,6 +10,7 @@
                        FontSize="Large"
                        HorizontalTextAlignment="Center"
                        Text="{Binding Question}" />
+                <Image Source="A.jpg" />
                 <Button x:Name="btnAnswerOne" Text="{Binding Answer1}" 
 				    IsEnabled="{Binding Answer1Enabled}" />
                 <Button x:Name="btnAnswerTwo" Text="{Binding Answer2}" 
