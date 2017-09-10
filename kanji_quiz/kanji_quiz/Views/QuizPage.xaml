@@ -6,9 +6,9 @@
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <StackLayout x:Name="slQuestion" IsVisible="true">                
                 <Image Source="{Binding Question}" VerticalOptions="Center"/>
-                <Button x:Name="btnAnswerOne" Text="{Binding Answer1}" IsEnabled="{Binding Answer1Enabled}" />
-                <Button x:Name="btnAnswerTwo" Text="{Binding Answer2}" IsEnabled="{Binding Answer2Enabled}" />
-                <Button x:Name="btnAnswerThree" Text="{Binding Answer3}" IsEnabled="{Binding Answer3Enabled}" />
+                <Button Text="{Binding Answer1}" IsEnabled="{Binding Answer1Enabled}" Command="{Binding Answer1Command}"/>
+                <Button Text="{Binding Answer2}" IsEnabled="{Binding Answer2Enabled}" Command="{Binding Answer2Command}"/>
+                <Button Text="{Binding Answer3}" IsEnabled="{Binding Answer3Enabled}" Command="{Binding Answer3Command}"/>
                 <Label x:Name="lblMessage"
                        FontAttributes="Italic"
                        FontSize="Large"

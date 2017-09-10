@@ -40,7 +40,10 @@
     </Compile>
     <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ChooseModePageViewModel.cs" />

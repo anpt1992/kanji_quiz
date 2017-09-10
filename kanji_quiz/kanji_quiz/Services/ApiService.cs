@@ -14,28 +14,29 @@ namespace kanji_quiz.Services
 {
     public class ApiService
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _client;
 
-        private const string HOST = "http://shtptraining-career.azurewebsites.net";
+        private const string HOST = "http://kanji-quiz.azurewebsites.net/";
         
 
         public ApiService()
         {
 
-            _httpClient = new HttpClient { BaseAddress = new Uri(HOST) };
+            _client = new HttpClient { BaseAddress = new Uri(HOST) };
         }
 
-        public Task<Quiz> Quiz_Detail(string Id)
+        public async Task<Result> GetQuestionSet()
         {
-            var url = $"Quiz/detail/{Id}";
-            return GetAsync<Quiz>(url);
+            var url = $"questions";
+            var content = await _client.GetStringAsync(url);
+            return JsonConvert.DeserializeObject<Result>(content);
         }
         internal async Task<T> GetAsync<T>(string url) where T : class
         {
 
             var message = new HttpRequestMessage(HttpMethod.Get, url);
             Debug.WriteLine("GET: " + url);
-            var response = await _httpClient.SendAsync(message);
+            var response = await _client.SendAsync(message);
 
 
             response.EnsureSuccessStatusCode();
