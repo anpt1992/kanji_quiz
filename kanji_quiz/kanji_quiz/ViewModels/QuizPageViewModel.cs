@@ -10,10 +10,10 @@ using kanji_quiz.Services;
 
 namespace kanji_quiz.ViewModels
 {
-    public class QuizPageViewModel:BaseViewModel
+    public class QuizPageViewModel : BaseViewModel
     {
-        private int _index=0;
-        public DelegateCommand ResultCommand { get; }
+        private int _index = 0;
+        private int _score = 0;
         public DelegateCommand BackCommand { get; }
         public DelegateCommand Answer1Command { get; }
         public DelegateCommand Answer2Command { get; }
@@ -45,11 +45,18 @@ namespace kanji_quiz.ViewModels
             get => _answer3;
             set => SetProperty(ref _answer3, value);
         }
-
+        private int _correctAnswer = 0;
+        public int CorrectAnswer
+        {
+            get { return this._correctAnswer; }
+            set
+            {
+                this._correctAnswer = value;
+            }
+        }
 
         public QuizPageViewModel(INavigationService navigationService, ApiService apiService) : base(navigationService)
         {
-            ResultCommand = new DelegateCommand(Result);
             BackCommand = new DelegateCommand(Back);
             Answer1Command = new DelegateCommand(Answer1_cmd);
             Answer2Command = new DelegateCommand(Answer2_cmd);
@@ -57,10 +64,6 @@ namespace kanji_quiz.ViewModels
             _apiService = apiService;
         }
 
-        private async void Result()
-        {
-            await NavigationService.NavigateAsync("Result");
-        }
         private async void Back()
         {
             await NavigationService.GoBackAsync();
@@ -68,15 +71,18 @@ namespace kanji_quiz.ViewModels
 
         private void Answer1_cmd()
         {
-            DoAnswer();
+            _score += CheckIfCorrect(1) ? 1 : 0;
 
+            DoAnswer();
         }
         private void Answer2_cmd()
         {
+            _score += CheckIfCorrect(2) ? 1 : 0;
             DoAnswer();
         }
         private void Answer3_cmd()
         {
+            _score += CheckIfCorrect(3) ? 1 : 0;
             DoAnswer();
         }
 
@@ -86,42 +92,33 @@ namespace kanji_quiz.ViewModels
             var result = await RunActionAsync(() => _apiService.GetQuestionSet());
             question_set = result.Data.Questions;
             ChooseNewQuestion();
-           
+
         }
 
         private void DoAnswer()
         {
-
-            ChooseNewQuestion();
-
-          /*  AppSettings.Score += score;
-            if (AppSettings.CurrentQuestion < AppSettings.QUESTIONS_COUNT)
+            if (_index < question_set.Count)
             {
-                AppSettings.CurrentQuestion++;
-                ((QuestionViewModel)BindingContext).ChooseNewQuestion();
+                ChooseNewQuestion();
             }
             else
             {
-                NavigateToEndPage();
-            }*/
+                NavigationService.NavigateAsync("Result", new NavigationParameters()
+                {
+                    {"score", _score}
+                });
+            }
         }
 
         public void ChooseNewQuestion()
         {
-         //   IsLoading = true;
-
-           /* int questionNumber = rnd.Next(0, QuestionList.Count);
-            XamarinQuiz selectedItem = QuestionList[questionNumber];
-
-            Answer1Enabled = true;
-            Answer2Enabled = true;
-            Answer3Enabled = true;*/
-
-            Question q1 = question_set[_index];
-            Question = q1.Content;
-            Answer1 = q1.Answer1;
-            Answer2 = q1.Answer2;
-            Answer3 = q1.Answer3;
+            //   IsLoading = true;  
+            Question q = question_set[_index];
+            Question = q.Content;
+            Answer1 = q.Answer1;
+            Answer2 = q.Answer2;
+            Answer3 = q.Answer3;
+            CorrectAnswer = q.CorrectAnswer;
             _index++;
             //CorrectAnswer = selectedItem.CorrectAnswer;
 
@@ -130,13 +127,21 @@ namespace kanji_quiz.ViewModels
 
         private void NavigateToEndPage()
         {
-          //  Application.Current.MainPage = new ThanksForPlaying();
+            //  Application.Current.MainPage = new ThanksForPlaying();
         }
 
         protected override void OnException(Exception e)
         {
             base.OnException(e);
-        }        
+        }
+        public bool CheckIfCorrect(int correct)
+        {
+            if (CorrectAnswer == correct)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
 }

@@ -14,10 +14,8 @@
                        FontSize="Large"
                        HorizontalTextAlignment="Center"
                        Text="{Binding Message}" />
-            </StackLayout>
-            
-            <StackLayout Margin="40" VerticalOptions="EndAndExpand">               
-                <Button Text="Result" Command="{Binding ResultCommand}"/>
+            </StackLayout>            
+            <StackLayout Margin="40" VerticalOptions="EndAndExpand">
                 <Button Text="Back" Command="{Binding BackCommand}"/>
             </StackLayout>
         </StackLayout>        

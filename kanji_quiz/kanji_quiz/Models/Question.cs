@@ -20,6 +20,6 @@ namespace kanji_quiz.Models
         [JsonProperty("answer3")]
         public string Answer3 { get; set; }
         [JsonProperty("correct_answer")]
-        public string CorrectAnswer { get; set; }
+        public int CorrectAnswer { get; set; }
     }
 }

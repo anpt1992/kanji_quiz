@@ -4,7 +4,7 @@
              x:Class="kanji_quiz.Views.ResultPage">
     <ContentPage.Content>
         <StackLayout Margin="40">
-            <Label Text="Welcome to Result Page!" />
+            <Label Text="{Binding Title}" />
             <Button Text="Finish" VerticalOptions="EndAndExpand" Command="{Binding FinishCommand}"/>
         </StackLayout>
     </ContentPage.Content>
